@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Movie Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Movie Explorer is a responsive web application that allows users to search, browse, and view details about popular movies. Built using React.js, this project fetches movie data from The Movie Database (TMDb) API and displays it in an organized and visually appealing interface. The project features components for displaying movie cards, a modal for detailed information, and pagination for navigating between pages.
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [Components](#components)
+- [Technologies Used](#technologies-used)
+- [License](#license)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Search Functionality**: Users can search for movies by title.
+- **Popular Movies Display**: The app showcases a list of popular movies fetched from TMDb.
+- **Detailed Movie Modal**: Clicking on a movie opens a modal with details, including title, tagline, overview, genres, production companies, release date, runtime, box office, and rating.
+- **Pagination**: Navigate through multiple pages of movies with "Previous" and "Next" buttons.
+- **Responsive Design**: Fully responsive design for an optimal user experience across different devices.
+  
+## Screenshots
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Web View](./screenshots/Movie%20Explorer%20Web%20View.png)
+![Mobile View](./screenshots/Movie%20Explorer%20Mobile%20View.png)
+![Movie Modal](./screenshots/Movie%20Explorer%20Web%20Modal%20View.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
+1. **Search**: Enter a movie title in the search bar to find specific movies.
+2. **Browse Popular Movies**: Browse a list of popular movies by scrolling and navigating through pages.
+3. **View Movie Details**: Click on any movie card to open a modal with detailed information.
+4. **Pagination**: Use the "Previous" and "Next" buttons at the bottom to navigate through pages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API Reference
 
-### `npm run build`
+This project uses [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api) to fetch movie data.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **API Endpoint**: 
+  - Popular Movies: `https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&page={PAGE}`
+  - Search Movies: `https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={QUERY}&page={PAGE}`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **App**: The main component that holds the application structure, including the search bar, movie list, modal, and pagination.
+- **MovieCard**: Displays individual movie cards with the movie poster and title.
+- **MovieDetails**: Shows detailed information about a selected movie inside a modal.
+- **MovieModal**: Handles the modal structure for displaying `MovieDetails`.
+- **Pagination**: Allows users to navigate between different pages of movie results.
 
-### `npm run eject`
+## Technologies Used
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **React.js**: JavaScript library for building user interfaces.
+- **Axios**: Promise-based HTTP client for making API requests.
+- **TMDb API**: Provides movie data for the application.
+- **CSS Modules**: Component-specific styling using separate CSS files for modularity and maintainability.
+- **React Modal**: Library for creating accessible modals.
