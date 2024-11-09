@@ -1,7 +1,7 @@
 import React from "react";
 import "./Pagination.css";
 
-const Pagination = ({ currentPage, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="pagination-container">
       <button
@@ -15,6 +15,7 @@ const Pagination = ({ currentPage, onPageChange }) => {
       <button
         className="pagination-button"
         onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
       >
         Next
       </button>

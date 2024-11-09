@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
 
-body, html {
+body,
+html {
   font-family: Arial, sans-serif;
   background-color: #1b1b1b;
   color: #ffffff;
@@ -25,9 +26,9 @@ body, html {
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.5em;
-  background: linear-gradient(90deg, #00FF00, #7de6c3);
+  background: linear-gradient(90deg, #00ff00, #7de6c3);
   -webkit-background-clip: text;
   color: transparent;
   text-align: center;
@@ -45,7 +46,7 @@ h1 {
   padding-left: 20px;
   margin-top: 20px;
   font-size: 1.5em;
-  color: #00FF00;
+  color: #00ff00;
 }
 
 .search-form {
@@ -68,7 +69,7 @@ h1 {
 .search-form button {
   padding: 8px 12px;
   font-size: 14px;
-  background-color: #00FF00;
+  background-color: #00ff00;
   color: #1b1b1b;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -93,7 +94,7 @@ button {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #00FF00;
+  background-color: #00ff00;
   color: #1b1b1b;
   border: none;
   border-radius: 5px;
@@ -102,4 +103,19 @@ button {
 
 button:hover {
   background-color: #7de6c3;
+}
+
+.notification-message {
+  text-align: center;
+  font-size: 1.1em;
+  color: #ff6b6b;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.no-results-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #7de6c3;
+  margin-top: 20px;
 }

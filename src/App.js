@@ -15,6 +15,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [notification, setNotification] = useState("");
 
   useEffect(() => {
     fetchMovies();
@@ -26,11 +27,43 @@ function App() {
       const response = await axios.get(
         `${BASE_URL}/${endpoint}?api_key=${API_KEY}&query=${searchQuery}&page=${page}`
       );
+
+      if (response.data.results.length === 0) {
+        setNotification("No movies found. Please try a different title.");
+        setMovies([]);
+        return;
+      }
+
       setMovies(response.data.results);
       setTotalPages(response.data.total_pages);
+      setNotification("");
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      if (!error.response) {
+        setNotification(
+          "Network error. Please check your internet connection."
+        );
+      } else if (error.response.status === 401) {
+        setNotification("Invalid API Key. Please check your API key.");
+      } else if (error.response.status === 429) {
+        setNotification(
+          "Too many requests. Please wait a moment and try again."
+        );
+      } else {
+        setNotification(
+          "An unexpected error occurred. Please try again later."
+        );
+      }
     }
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (!searchQuery.trim()) {
+      setNotification("Please enter a movie title to search.");
+      return;
+    }
+    setPage(1);
+    fetchMovies();
   };
 
   const fetchMovieDetails = async (movieId) => {
@@ -41,14 +74,9 @@ function App() {
       setSelectedMovie(response.data);
       setIsModalOpen(true);
     } catch (error) {
-      console.error("Error fetching movie details:", error);
+      setNotification("Failed to load movie details. Please try again.");
+      setIsModalOpen(false);
     }
-  };
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setPage(1);
-    fetchMovies();
   };
 
   const closeModal = () => {
@@ -57,6 +85,7 @@ function App() {
   };
 
   const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
     setPage(newPage);
   };
 
@@ -76,17 +105,27 @@ function App() {
         <button type="submit">Search</button>
       </form>
 
+      {notification && <p className="notification-message">{notification}</p>}
+
       <h2 className="movie-list-title">Popular Movies:</h2>
 
-      <div className="movie-list">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            onClick={() => fetchMovieDetails(movie.id)}
-          />
-        ))}
-      </div>
+      {movies.length > 0 ? (
+        <div className="movie-list">
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              onClick={() => fetchMovieDetails(movie.id)}
+            />
+          ))}
+        </div>
+      ) : (
+        !notification && (
+          <p className="no-results-message">
+            No movies found. Please try a different title.
+          </p>
+        )
+      )}
 
       <Pagination
         currentPage={page}
