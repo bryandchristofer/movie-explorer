@@ -16,8 +16,7 @@ Movie Explorer is a responsive web application that allows users to search, brow
 - **Popular Movies Display**: The app showcases a list of popular movies fetched from TMDb.
 - **Detailed Movie Modal**: Clicking on a movie opens a modal with details, including title, tagline, overview, genres, production companies, release date, runtime, box office, and rating.
 - **Pagination with Loading State**: Navigate through multiple pages of movies with "Previous" and "Next" buttons. A loading indicator displays when fetching data for new pages.
-- **Error Handling**: Robust error handling for network issues, API errors, and invalid user input, with descriptive notifications to guide users.
-- **Fallback UI for Empty Results**: If no search results are found, a friendly notification displays below the search bar to inform the user.
+- **Error Handling**: Robust error handling for network issues, and invalid user input, with descriptive notifications to guide users.
   
 ## Screenshots
 
@@ -42,8 +41,6 @@ Movie Explorer is a responsive web application that allows users to search, brow
 2. **Browse Popular Movies**: Browse a list of popular movies by scrolling and navigating through pages.
 3. **View Movie Details**: Click on any movie card to open a modal with detailed information.
 4. **Pagination with Loading State**: Use the "Previous" and "Next" buttons at the bottom to navigate through pages. A loading message appears while movies are being fetched.
-5. **Error Notifications**: If a network issue or API error occurs, or if an invalid search is submitted, descriptive messages will notify the user of the issue.
-6. **Fallback UI for Empty Results**: If no results match the search, a notification displays below the search bar.
 
 ## API Reference
 
@@ -52,28 +49,27 @@ This project uses [The Movie Database (TMDb) API](https://www.themoviedb.org/doc
 - **API Endpoints**: 
   - Popular Movies: `https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&page={PAGE}`
   - Search Movies: `https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={QUERY}&page={PAGE}`
-- **API Key**: `c754525c72e94b575c0d34013e3eedaa`
 
 ## Components
 
-- **App**: The main component that holds the application structure, including the search bar, movie list, modal, and pagination.
-- **MovieCard**: Displays individual movie cards with the movie poster and title.
-- **MovieDetails**: Shows detailed information about a selected movie inside a modal.
-- **MovieModal**: Handles the modal structure for displaying `MovieDetails`.
-- **Pagination**: Allows users to navigate between different pages of movie results with loading states and error handling.
+- **App**
+- **MovieCard**
+- **MovieDetails**
+- **MovieModal**
+- **Pagination**
 
 ## Error Handling
 
-- **Network Errors**: Notifies users of network issues or API rate limits.
-- **Invalid API Key**: Displays a message if the API key is missing or incorrect.
-- **Empty Search**: Alerts users when they attempt to search with an empty input.
-- **Fallback for No Results**: Displays a message below the search bar if no movies are found.
+- **Network Errors**
+- **Invalid API Key**
+- **Empty Search**
+- **Fallback for No Results**
 
 ## Technologies Used
 
-- **React.js**: JavaScript library for building user interfaces.
-- **Axios**: Promise-based HTTP client for making API requests.
-- **TMDb API**: Provides movie data for the application.
-- **CSS Modules**: Component-specific styling for modularity and maintainability.
-- **React Modal**: Library for creating accessible modals.
-- **Custom Loading and Notification Components**: Provides visual feedback for loading and error states.
+- **React.js**
+- **Axios**
+- **TMDb API**
+- **CSS Modules**
+- **React Modal**
+- **Custom Loading and Notification Components**
