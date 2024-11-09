@@ -119,3 +119,10 @@ button:hover {
   color: #7de6c3;
   margin-top: 20px;
 }
+
+.loading-spinner {
+  text-align: center;
+  font-size: 1.2em;
+  color: #00FF00;
+  margin: 20px 0;
+}

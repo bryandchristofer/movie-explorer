@@ -16,12 +16,14 @@ function App() {
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notification, setNotification] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchMovies();
   }, [page, searchQuery]);
 
   const fetchMovies = async () => {
+    setLoading(true);
     try {
       const endpoint = searchQuery ? "search/movie" : "movie/popular";
       const response = await axios.get(
@@ -31,19 +33,16 @@ function App() {
       if (response.data.results.length === 0) {
         setNotification("No movies found. Please try a different title.");
         setMovies([]);
-        return;
+      } else {
+        setMovies(response.data.results);
+        setTotalPages(response.data.total_pages);
+        setNotification("");
       }
-
-      setMovies(response.data.results);
-      setTotalPages(response.data.total_pages);
-      setNotification("");
     } catch (error) {
       if (!error.response) {
         setNotification(
           "Network error. Please check your internet connection."
         );
-      } else if (error.response.status === 401) {
-        setNotification("Invalid API Key. Please check your API key.");
       } else if (error.response.status === 429) {
         setNotification(
           "Too many requests. Please wait a moment and try again."
@@ -53,6 +52,8 @@ function App() {
           "An unexpected error occurred. Please try again later."
         );
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,22 +110,24 @@ function App() {
 
       <h2 className="movie-list-title">Popular Movies:</h2>
 
-      {movies.length > 0 ? (
-        <div className="movie-list">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onClick={() => fetchMovieDetails(movie.id)}
-            />
-          ))}
-        </div>
+      {loading ? (
+        <div className="loading-spinner">Loading movies...</div>
       ) : (
-        !notification && (
-          <p className="no-results-message">
-            No movies found. Please try a different title.
-          </p>
-        )
+        <div className="movie-list">
+          {movies.length > 0 ? (
+            movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onClick={() => fetchMovieDetails(movie.id)}
+              />
+            ))
+          ) : (
+            <p className="no-results-message">
+              No movies found. Please try a different title.
+            </p>
+          )}
+        </div>
       )}
 
       <Pagination
