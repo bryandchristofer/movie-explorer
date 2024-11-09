@@ -21,9 +21,18 @@ Movie Explorer is a responsive web application that allows users to search, brow
   
 ## Screenshots
 
+### Web View
 <p align="center">
-  <img src="./screenshots/Movie Explorer Web Modal View.png" alt="Web View" width="400">
+  <img src="./screenshots/Movie Explorer Web View.png" alt="Web View" width="400">
+</p>
+
+### Mobile View
+<p align="center">
   <img src="./screenshots/Movie Explorer Mobile View.png" alt="Mobile View" width="400">
+</p>
+
+### Movie Modal
+<p align="center">
   <img src="./screenshots/Movie Explorer Web Modal View.png" alt="Movie Modal" width="400">
 </p>
 
