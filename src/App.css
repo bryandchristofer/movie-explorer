@@ -1,38 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+body, html {
+  font-family: Arial, sans-serif;
+  background-color: #1b1b1b;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5em;
+  background: linear-gradient(90deg, #00FF00, #7de6c3);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin: 0 0 20px 0;
+  padding: 10px 0;
+  text-shadow: 2px 2px 5px rgba(0, 255, 0, 0.3);
+  border-bottom: 2px solid #7de6c3;
+  display: inline-block;
+}
+
+.movie-list-title {
+  text-align: left;
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 20px;
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #00FF00;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-form input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  flex: 1;
+}
+
+.search-form button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #00FF00;
+  color: #1b1b1b;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #7de6c3;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  max-width: 1200px;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #00FF00;
+  color: #1b1b1b;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #7de6c3;
 }
