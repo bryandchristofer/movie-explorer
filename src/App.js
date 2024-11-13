@@ -11,14 +11,13 @@ const BASE_URL = "https://api.themoviedb.org/3";
 function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [inputQuery, setInputQuery] = useState(""); // Now controls both input and search
+  const [inputQuery, setInputQuery] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notification, setNotification] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Fetch movies whenever `page` or `inputQuery` changes
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
@@ -56,9 +55,8 @@ function App() {
     };
 
     fetchMovies();
-  }, [page, inputQuery]); // Fetches movies whenever `page` or `inputQuery` changes
+  }, [page, inputQuery]);
 
-  // Reset to page 1 when inputQuery changes
   useEffect(() => {
     setPage(1);
   }, [inputQuery]);
