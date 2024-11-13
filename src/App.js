@@ -23,16 +23,27 @@ function App() {
       setLoading(true);
       try {
         const endpoint = inputQuery ? "search/movie" : "movie/popular";
-        const response = await axios.get(
+
+        const responsePage1 = await axios.get(
           `${BASE_URL}/${endpoint}?api_key=${API_KEY}&query=${inputQuery}&page=${page}`
         );
+        const responsePage2 = await axios.get(
+          `${BASE_URL}/${endpoint}?api_key=${API_KEY}&query=${inputQuery}&page=${
+            page + 1
+          }`
+        );
 
-        if (response.data.results.length === 0) {
+        const combinedResults = [
+          ...responsePage1.data.results,
+          ...responsePage2.data.results,
+        ].slice(0, 21);
+
+        if (combinedResults.length === 0) {
           setNotification("No movies found. Please try a different title.");
           setMovies([]);
         } else {
-          setMovies(response.data.results);
-          setTotalPages(response.data.total_pages);
+          setMovies(combinedResults);
+          setTotalPages(responsePage1.data.total_pages);
           setNotification("");
         }
       } catch (error) {
