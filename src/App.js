@@ -11,61 +11,57 @@ const BASE_URL = "https://api.themoviedb.org/3";
 function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [inputQuery, setInputQuery] = useState(""); // Now controls both input and search
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notification, setNotification] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Fetch movies whenever `page` or `inputQuery` changes
   useEffect(() => {
+    const fetchMovies = async () => {
+      setLoading(true);
+      try {
+        const endpoint = inputQuery ? "search/movie" : "movie/popular";
+        const response = await axios.get(
+          `${BASE_URL}/${endpoint}?api_key=${API_KEY}&query=${inputQuery}&page=${page}`
+        );
+
+        if (response.data.results.length === 0) {
+          setNotification("No movies found. Please try a different title.");
+          setMovies([]);
+        } else {
+          setMovies(response.data.results);
+          setTotalPages(response.data.total_pages);
+          setNotification("");
+        }
+      } catch (error) {
+        if (!error.response) {
+          setNotification(
+            "Network error. Please check your internet connection."
+          );
+        } else if (error.response.status === 429) {
+          setNotification(
+            "Too many requests. Please wait a moment and try again."
+          );
+        } else {
+          setNotification(
+            "An unexpected error occurred. Please try again later."
+          );
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchMovies();
-  }, [page, searchQuery]);
+  }, [page, inputQuery]); // Fetches movies whenever `page` or `inputQuery` changes
 
-  const fetchMovies = async () => {
-    setLoading(true);
-    try {
-      const endpoint = searchQuery ? "search/movie" : "movie/popular";
-      const response = await axios.get(
-        `${BASE_URL}/${endpoint}?api_key=${API_KEY}&query=${searchQuery}&page=${page}`
-      );
-
-      if (response.data.results.length === 0) {
-        setNotification("No movies found. Please try a different title.");
-        setMovies([]);
-      } else {
-        setMovies(response.data.results);
-        setTotalPages(response.data.total_pages);
-        setNotification("");
-      }
-    } catch (error) {
-      if (!error.response) {
-        setNotification(
-          "Network error. Please check your internet connection."
-        );
-      } else if (error.response.status === 429) {
-        setNotification(
-          "Too many requests. Please wait a moment and try again."
-        );
-      } else {
-        setNotification(
-          "An unexpected error occurred. Please try again later."
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    if (!searchQuery.trim()) {
-      setNotification("Please enter a movie title to search.");
-      return;
-    }
+  // Reset to page 1 when inputQuery changes
+  useEffect(() => {
     setPage(1);
-    fetchMovies();
-  };
+  }, [inputQuery]);
 
   const fetchMovieDetails = async (movieId) => {
     try {
@@ -96,15 +92,14 @@ function App() {
         <h1>Movie Explorer</h1>
       </div>
 
-      <form onSubmit={handleSearch} className="search-form">
+      <div className="search-form">
         <input
           type="text"
           placeholder="Search for a movie..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={inputQuery}
+          onChange={(e) => setInputQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
-      </form>
+      </div>
 
       {notification && <p className="notification-message">{notification}</p>}
 
