@@ -5,7 +5,7 @@ import MovieModal from "./components/MovieModal";
 import Pagination from "./components/Pagination";
 import "./App.css";
 
-const API_KEY = "c754525c72e94b575c0d34013e3eedaa";
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 
 function App() {
