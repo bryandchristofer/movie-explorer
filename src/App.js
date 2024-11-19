@@ -72,6 +72,15 @@ function App() {
     setPage(1);
   }, [inputQuery]);
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (!inputQuery.trim()) {
+      setNotification("Please enter a movie title to search.");
+      return;
+    }
+    setNotification("");
+  };
+
   const fetchMovieDetails = async (movieId) => {
     try {
       const response = await axios.get(
@@ -101,14 +110,15 @@ function App() {
         <h1>Movie Explorer</h1>
       </div>
 
-      <div className="search-form">
+      <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
           placeholder="Search for a movie..."
           value={inputQuery}
           onChange={(e) => setInputQuery(e.target.value)}
         />
-      </div>
+        <button type="submit">Search</button>
+      </form>
 
       {notification && <p className="notification-message">{notification}</p>}
 
